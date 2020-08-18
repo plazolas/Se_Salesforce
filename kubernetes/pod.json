@@ -1,0 +1,134 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "hygieia-api-67db69ff66-jmfrg",
+    "generateName": "hygieia-api-67db69ff66-",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/pods/hygieia-api-67db69ff66-jmfrg",
+    "uid": "a18b1776-5a3d-11e9-9054-0800279afa28",
+    "resourceVersion": "98636",
+    "creationTimestamp": "2019-04-08T20:33:56Z",
+    "labels": {
+      "pod-template-hash": "67db69ff66",
+      "run": "hygieia-api"
+    },
+    "ownerReferences": [
+      {
+        "apiVersion": "apps/v1",
+        "kind": "ReplicaSet",
+        "name": "hygieia-api-67db69ff66",
+        "uid": "a17c7b89-5a3d-11e9-9054-0800279afa28",
+        "controller": true,
+        "blockOwnerDeletion": true
+      }
+    ]
+  },
+  "spec": {
+    "volumes": [
+      {
+        "name": "default-token-ckm6q",
+        "secret": {
+          "secretName": "default-token-ckm6q",
+          "defaultMode": 420
+        }
+      }
+    ],
+    "containers": [
+      {
+        "name": "hygieia-api",
+        "image": "localhost:5000/hygieia-api:latest",
+        "ports": [
+          {
+            "containerPort": 7305,
+            "protocol": "TCP"
+          }
+        ],
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name": "default-token-ckm6q",
+            "readOnly": true,
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "imagePullPolicy": "Always"
+      }
+    ],
+    "restartPolicy": "Always",
+    "terminationGracePeriodSeconds": 30,
+    "dnsPolicy": "ClusterFirst",
+    "serviceAccountName": "default",
+    "serviceAccount": "default",
+    "nodeName": "minikube",
+    "securityContext": {},
+    "schedulerName": "default-scheduler",
+    "tolerations": [
+      {
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      },
+      {
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 300
+      }
+    ],
+    "priority": 0,
+    "enableServiceLinks": true
+  },
+  "status": {
+    "phase": "Running",
+    "conditions": [
+      {
+        "type": "Initialized",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-04-08T20:33:56Z"
+      },
+      {
+        "type": "Ready",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-04-08T20:33:58Z"
+      },
+      {
+        "type": "ContainersReady",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-04-08T20:33:58Z"
+      },
+      {
+        "type": "PodScheduled",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-04-08T20:33:56Z"
+      }
+    ],
+    "hostIP": "10.0.2.15",
+    "podIP": "172.17.0.8",
+    "startTime": "2019-04-08T20:33:56Z",
+    "containerStatuses": [
+      {
+        "name": "hygieia-api",
+        "state": {
+          "running": {
+            "startedAt": "2019-04-08T20:33:57Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "localhost:5000/hygieia-api:latest",
+        "imageID": "docker-pullable://localhost:5000/hygieia-api@sha256:e03ebc3db45ba4937ae737e2a6b3649b88e0ed7b9cb4b453423d96ca5563465c",
+        "containerID": "docker://01cf0354139e20fb75168378c795ec10b258763e2de89df40c8898154ebf9661"
+      }
+    ],
+    "qosClass": "BestEffort"
+  }
+}

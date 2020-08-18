@@ -1,0 +1,33 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "hygieia-api",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/services/hygieia-api",
+    "resourceVersion": "99198",
+    "labels": {
+      "run": "hygieia-api"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "protocol": "TCP",
+        "port": 7305,
+        "targetPort": 7305,
+        "nodePort": 31510
+      }
+    ],
+    "selector": {
+      "run": "hygieia-api"
+    },
+    "clusterIP": "10.109.117.188",
+    "type": "NodePort",
+    "sessionAffinity": "None",
+    "externalTrafficPolicy": "Cluster"
+  },
+  "status": {
+    "loadBalancer": {}
+  }
+}

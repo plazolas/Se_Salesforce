@@ -1,0 +1,74 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "salesforcetests",
+    "namespace": "default",
+    "selfLink": "/apis/extensions/v1beta1/namespaces/default/deployments/salesforcetests",
+    "generation": 1,
+    "creationTimestamp": null,
+    "labels": {
+      "run": "salesforce"
+    },
+    "annotations": {
+      "deployment.kubernetes.io/revision": "1"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "run": "salesforce"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "run": "salesforce"
+        }
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "dshm",
+            "emptyDir": {
+                "medium": "Memory"
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "salesforce",
+            "image": "localhost:5000/salesforcetests:latest",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always",
+            "stdin": true,
+            "volumeMounts": [
+                {
+                    "mountPath": "/dev/shm",
+                    "name": "dshm"
+                }
+            ]
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 15,
+        "dnsPolicy": "ClusterFirst",
+        "securityContext": {},
+        "schedulerName": "default-scheduler"
+      }
+    },
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 1,
+        "maxSurge": 1
+      }
+    },
+    "revisionHistoryLimit": 1,
+    "progressDeadlineSeconds": 600
+  }
+}

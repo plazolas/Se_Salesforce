@@ -1,0 +1,14 @@
+gov.va.salesforceTests
+gov.va.salesforceTests.classes
+gov.va.salesforceTests.framework
+gov.va.salesforceTests.globals
+gov.va.salesforceTests.helpers
+gov.va.salesforceTests.logger
+gov.va.salesforceTests.pageObjects
+gov.va.salesforceTests.pageObjects.Accounts
+gov.va.salesforceTests.pageObjects.Participants
+gov.va.salesforceTests.pageObjects.Transactions
+gov.va.salesforceTests.seleniumTests.Accounts
+gov.va.salesforceTests.seleniumTests.Participants
+gov.va.salesforceTests.seleniumTests.Transactions
+gov.va.salesforceTests.utils

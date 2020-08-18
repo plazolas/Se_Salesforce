@@ -1,0 +1,34 @@
+# IntelliJ IDE
+/.idea/
+*.iml
+
+# eclipse IDE
+.project
+
+# Compiled class files
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.nar
+*.ear
+*.zip
+*.rar
+
+# virtual machine crash logs
+hs_err_pid*
+
+# taget dir
+/target/
+
+# eMPWR Selenium: local properties file and reports dir
+/reports/
