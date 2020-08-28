@@ -55,6 +55,7 @@ public class Test1022ParticipantSearch extends Framework {
         long loadComponentTime = 0;
         long loadDetailsTime = 0;
         long loadNotesTime = 0;
+        long loadHistoryTime = 0;
         long current_test_time;
         Boolean waffleFound = false;
         int c_user, c_test;
@@ -192,23 +193,53 @@ public class Test1022ParticipantSearch extends Framework {
                     continue;
                 }
 
-                Thread.sleep(2000);
+                int delay = 10000;
+                Thread.sleep(delay);
+
+                try {
+                    loadHistoryTime = participants.viewDetails("history");
+                    log("load  transaction history: " + loadHistoryTime);
+                } catch (Exception err2) {
+                    log(err2.getMessage());
+                }
+
+                if (loadHistoryTime == 0) {
+                    log("***********************");
+                    log("Did not load HISTORY!");
+                    log("***********************");
+                    Thread.sleep(delay/2);
+                    //continue;
+                }
 
                 try {
                     loadDetailsTime = participants.viewDetails("details");
-                    log("load Details: " + loadDetailsTime);
+                    log("load details: " + loadDetailsTime);
                 } catch (Exception err2) {
                     log(err2.getMessage());
+                }
+
+                if (loadDetailsTime == 0) {
+                    log("***********************");
+                    log("Did not load DETAILS!");
+                    log("***********************");
+                    //continue;
                 }
 
                 try {
                     loadNotesTime = participants.viewDetails("notes");
-                    log("load Notes: " + loadNotesTime);
+                    log("load notes: " + loadNotesTime);
                 } catch (Exception err2) {
                     log(err2.getMessage());
                 }
 
-                current_test_time = loginTime + loadComponentTime + loadParticipantTime + loadDetailsTime;
+                if (loadNotesTime == 0) {
+                    log("***********************");
+                    log("Did not load NOTES!");
+                    log("***********************");
+                    //continue;
+                }
+
+                current_test_time = loginTime + loadComponentTime + loadParticipantTime + loadHistoryTime + loadDetailsTime + loadNotesTime;
 
                 log("............... EXEC TIME PROFILE REPORT .................");
                 log("Test Date: " + LocalDate.now() + " " + LocalTime.now());
@@ -217,7 +248,8 @@ public class Test1022ParticipantSearch extends Framework {
                 log("....................... PROFILE ..........................");
                 log("LOGIN: " + loginTime);
                 log("LOAD COMPONENT: " + loadComponentTime);
-                log("LOAD PARTICIPANT: " + loadParticipantTime);
+                log("LOAD PARTICIPANT PAGE: " + loadParticipantTime);
+                log("LOAD TRANSACTION HISTORY: " + loadHistoryTime);
                 log("LOAD DETAILS: " + loadDetailsTime);
                 log("LOAD NOTES: " + loadNotesTime);
                 log("TOTAL TEST TIME: " + current_test_time);
@@ -227,6 +259,7 @@ public class Test1022ParticipantSearch extends Framework {
                         .append("," + loginTime + ",")
                         .append(loadComponentTime + ",")
                         .append(loadParticipantTime + ",")
+                        .append(loadHistoryTime + ",")
                         .append(loadDetailsTime + ",")
                         .append(loadNotesTime + ",")
                         .append(current_test_time + "\n");

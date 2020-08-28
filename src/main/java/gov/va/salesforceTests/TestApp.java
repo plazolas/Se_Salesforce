@@ -59,7 +59,7 @@ public class TestApp {
             switch (test) {
                 case "1022":
                     Test1022ParticipantSearch test1022ParticipantSearch = new Test1022ParticipantSearch();
-                    test1022ParticipantSearch.regressionTest();
+                    //test1022ParticipantSearch.regressionTest();
                     test1022ParticipantSearch.performanceTest();
                     break;
                 case "SalesforceAPI":

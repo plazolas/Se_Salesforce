@@ -101,6 +101,7 @@ public class Globals {
     public static String status;
     public static String api = "false";
 
+    public static String historyDetails;
     public static String participantDetails;
     public static String notesDetails;
 
@@ -166,11 +167,17 @@ public class Globals {
                 ACCOUNT_DETAILS_XPATH = "//*[@id=\"detailTab__item\"]";
                 ACCOUNT_ZIPCODE_XPATH = "//*[@id=\"window\"]";
 
-                participant_ssn = "137124444";
-                participant_sf_id = "0033500000Hwao5AAB";
-                participant_corp_id = "333073";
-                participant_name = "MARTHA";
+                participant_ssn = "951951949";
+                participant_sf_id = "0033500000Hisk2AAB";
+                participant_corp_id = "32431840";
+                participant_name = "ZEEK";
                 transaction_search = "A21";
+
+                //participant_ssn = "137124444";
+                //participant_sf_id = "0033500000Hwao5AAB";
+                //participant_corp_id = "333073";
+                //participant_name = "MARTHA";
+                //transaction_search = "A21";
                 break;
 
             case "uat":

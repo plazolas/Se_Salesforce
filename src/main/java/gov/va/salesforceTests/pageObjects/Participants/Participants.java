@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import gov.va.salesforceTests.framework.BrowserUtils;
 import gov.va.salesforceTests.framework.Framework;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -21,12 +22,15 @@ public class Participants extends Framework {
     private BrowserUtils browser;
     private WebDriverWait wait;
 
-    private By partIdLocator =          By.xpath("//input[@name='Participant Id']");
-    private By searchButtonLocator =    By.xpath("//button[contains(text(),'Search')]");
-    private String detailsAnchorXpath = "/html/body/div[4]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/lightning-tab-bar/ul/li[2]/a";
-    private String detailsItemXpath =   "/html/body/div[4]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/slot/flexipage-tab2[2]/slot/flexipage-component2/slot/records-lwc-detail-panel/records-base-record-form/div/div/div/records-record-layout-event-broker/slot/records-lwc-record-layout/forcegenerated-detailpanel_contact___012t000000009jaaai___full___view___recordlayout2/force-record-layout-block/slot/force-record-layout-section/div/div/div/slot/force-record-layout-row[5]/slot/force-record-layout-item[1]/div/div/div[2]/span/slot[1]/slot/lightning-formatted-text";
-    private String notesAnchorXpath =   "/html/body/div[4]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/lightning-tab-bar/ul/li[3]/a";
-    private String notesItemXpath =     "/html/body/div[4]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/slot/flexipage-tab2[3]/slot/flexipage-component2/slot/c-e-m-p-w-r_-notes/div/div/lightning-datatable/div[2]/div/div/div/table/tbody/tr[1]/td[1]/lightning-primitive-cell-factory/span/div/lightning-base-formatted-text";
+    private By partIdLocator = By.xpath("//input[@name='Participant Id']");
+    private By searchButtonLocator = By.xpath("//button[contains(text(),'Search')]");
+    private String histXpath =        "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/lightning-tab-bar/ul/li[1]/a";
+    private String detailsXpath =     "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/lightning-tab-bar/ul/li[2]/a";
+    private String notesXpath =       "/html/body/div[4]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/lightning-tab-bar/ul/li[3]/a";
+    private String historyItemXpath = "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/slot/flexipage-tab2[1]/slot/flexipage-component2/slot/flexipage-aura-wrapper/div/div/div/div[1]/div/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div/table/tbody/tr[1]/th/span/div/a";
+    private String detailsItemXpath = "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/slot/flexipage-tab2[2]/slot/flexipage-component2/slot/records-lwc-detail-panel/records-base-record-form/div/div/div/records-record-layout-event-broker/slot/records-lwc-record-layout/forcegenerated-detailpanel_contact___012t000000009jaaai___full___view___recordlayout2/force-record-layout-block/slot/force-record-layout-section/div/div/div";
+    private String notesItemXpath =   "/html/body/div[4]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/slot/flexipage-tab2[3]/slot/flexipage-component2/slot/c-e-m-p-w-r_-notes/div/div/lightning-datatable/div[2]/div/div/div/table/tbody/tr[1]/td[1]/lightning-primitive-cell-factory/span/div/lightning-base-formatted-text";
+    private String componentXpath =   "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div";
 
     /**
      * Method Participants is the Constructor.
@@ -34,20 +38,26 @@ public class Participants extends Framework {
     public Participants() {
         driver = getInstance().getDriver();
         browser = new BrowserUtils(globals.implicitWait, globals.polling);
-        wait = new WebDriverWait(driver, globals.implicitWait, globals.polling);
+        wait = new WebDriverWait(driver, 200, 100);
     }
 
     /**
      * Method searchParticipant enters a Participant SSN/TIN/FILE_NUMBER
-     * @param part SSN/TIN/FILE_NUMBER
-     * @param name string name of the participant
+     *
+     * @param part         SSN/TIN/FILE_NUMBER
+     * @param name         string name of the participant
      * @param fallback_url is the url string to navigate if element is not found.
      * @return time in milliseconds it took to load all the object's items on the page.
      */
     public long searchParticipant(String part, String name, String fallback_url) {
         WebElement e;
-        long startTime, totalTime = 0;
+        long startTime;
+        long totalTime;
         String title = name;
+        int i = 0;
+        int timer;
+        String str;
+        String script;
 
         try {
             e = driver.findElement(partIdLocator);
@@ -67,7 +77,7 @@ public class Participants extends Framework {
             e = driver.findElement(searchButtonLocator);
             if (!e.isDisplayed() && !e.isEnabled()) {
                 log("Enabling Participant Search Button");
-                String script = " " +
+                script = " " +
                         "var flag = 0;" +
                         "var count = 0;" +
                         "var content = '';" +
@@ -81,7 +91,7 @@ public class Participants extends Framework {
                         "   }" +
                         "}" +
                         "return content;";
-                String str = browser.runJavascript(script);
+                str = browser.runJavascript(script);
                 log(str);
                 Thread.sleep(500);
                 e = driver.findElement(searchButtonLocator);
@@ -91,19 +101,15 @@ public class Participants extends Framework {
                 startTime = System.currentTimeMillis();
                 e.click();
                 log("Search clicked for participant " + part);
-                int i = 0;
-                while (!driver.getTitle().contains(title) && i < 200) {
-                    Thread.sleep(500);
-                    i++;
-                }
-                if(i > 199) {
-                    log("participant search takes too long!");
-                    return 0;
-                }
+                wait = new WebDriverWait(driver, 300, 100);
+                wait.until( ExpectedConditions.refreshed(ExpectedConditions.titleContains(title)) );
                 totalTime = System.currentTimeMillis() - startTime;
+
             } else {
+                log("**********************************************");
                 log("Participant Search button not enabled!");
-                log("using backup url");
+                log("USING BACKUP URL");
+                log("**********************************************");
                 startTime = System.currentTimeMillis();
                 driver.get(fallback_url);
                 browser.waitForTitle(title);
@@ -117,38 +123,148 @@ public class Participants extends Framework {
     }
 
     /**
-     * Method viewDetails loads detail of the Salesforce items page.
-     * @param context string indicating whether you are testing transactions, notes, details, eFolder etc.
+     * Method viewDetails loads context details from a Participant Page.
+     *
+     * @param context string indicating whether you are testing transaction history, details, notes, eFolder etc.
      * @return time in milliseconds it took to load the Object's item Details on the page.
      */
     public long viewDetails(String context) {
         By ByXpath = null;
         String itemXpath = "";
-        WebElement a;
+        WebElement a = null;
+        String script;
+        String str;
+        Boolean flag;
+        long startTime = 0;
+        long totalTime;
 
         switch (context) {
+            case "history":
+                ByXpath = By.xpath(histXpath);
+                itemXpath = historyItemXpath;
+                break;
             case "details":
-                ByXpath = By.xpath(detailsAnchorXpath);
+                ByXpath = By.xpath(detailsXpath);
                 itemXpath = detailsItemXpath;
                 break;
             case "notes":
-                ByXpath = By.xpath(notesAnchorXpath);
+                ByXpath = By.xpath(notesXpath);
                 itemXpath = notesItemXpath;
                 break;
         }
 
-        long startTime;
-        long totalTime;
+        if(context.contains("history")) {
+            try {
+                Thread.sleep(5000);
+                WebElement e = browser.findByTagAttributeClassText("div", "class", "oneUtilityBar", "Participant Search");
+                while (e != null) {
+                    JavascriptExecutor js = (JavascriptExecutor) driver;
+                    js.executeScript("return arguments[0].setAttribute('style','z-index: -1');", e);
+                    js.executeScript("return arguments[0].remove();", e);
+                    log("*** REMOVED UTILITY BAR ***");
+                    e = browser.findByTagAttributeClassText("div", "class", "oneUtilityBar", "Participant Search");
+                }
+
+            } catch (Exception spinnerErr) {
+                System.out.println("**********  COULD NOT REMOVE Participant Search UTILITY BAR ***************");
+            }
+            try {
+                script = " " +
+                        "var spinner = document.querySelectorAll('.slds-spinner_container');" +
+                        "var content = '' ;" +
+                        "var str = '' ;" +
+                        "for (let i=0; i < spinner.length; i++) { " +
+                        "   content = spinner[i].innerText;" +
+                        "   if(content == null || content == 'undefined') continue; " +
+                        "   str += '|' + content; " +
+                        "}" +
+                        "str = 'spinners: ' + spinner.length + '--' + str;" +
+                        "return str;";
+                browser.runJavascript(script);
+    
+                script = " " +
+                        "var e = document.querySelector('.viewport');" +
+                        "var hasVerticalScrollbar = e.scrollHeight > e.clientHeight;" +
+                        "var str = ' viewport has vertical scroll: ' + hasVerticalScrollbar;" +
+                        "return str;";
+                browser.runJavascript(script);
+
+                script = " " +
+                        "var e = document.querySelector('.viewport');" +
+                        "e.scrollBy(0, 1000);" +
+                        "var str = ' scrolled down 1000px ';" +
+                        "return str;";
+                browser.runJavascript(script);
+
+                script = " " +
+                        "var nodes = document.evaluate('" + componentXpath + "', document, null, XPathResult.ANY_TYPE, null);" +
+                        "if(nodes == null)  { " +
+                        "  return 'nodes is null';" +
+                        "}" +
+                        "var component = null;" +
+                        "var str = '';" +
+                        "if(nodes.iterateNext == 'function') { " +
+                        "  component = nodes.iterateNext(); " +
+                        "} else {" +
+                        "  str = nodes.iterateNext;" +
+                        "  str += nodes.resultType;" +
+                        "  return str;" +
+                        "}" +
+                        "if(component != null)  { " +
+                        "  component.setAttribute('style','z-index: 99999');" +
+                        "  return component.innerHTML;" +
+                        "} else { " +
+                        "  return 'component is null';" +
+                        "}";
+                browser.runJavascript(script);
+
+                log("context: " + context);
+                startTime = System.currentTimeMillis();
+                waitForDetails(itemXpath, context);
+                totalTime = System.currentTimeMillis() - startTime;
+                log("totaltime: " + totalTime);
+                return totalTime;
+
+            } catch (Exception scrollErr) {
+                System.out.println("** 0X *********** viewport - spinner count Exception!");
+                log(scrollErr.getMessage());
+            }
+        }
+
+        // Notes has not been implemented yet3hour(s) |
+        if (context.contains("notes")) {
+            return 99999;
+        }
 
         try {
             a = driver.findElement(ByXpath);
-            log(a.getAttribute("outerHTML"));
-            startTime = System.currentTimeMillis();
+        } catch (Exception xpex) {
+            log("Did not find context tab");
+            log(xpex.getMessage());
+        }
+        log(a.getAttribute("outerHTML"));
+
+        startTime = System.currentTimeMillis();
+        try {
             if (a.isEnabled() && a.isDisplayed()) {
-                a.click();
-                log("CLICKED on Participant Context Link");
+
+                flag = false;
+                while (flag == false) {
+                    try {
+                        Thread.sleep(2000);
+                        a.click();
+                        flag = true;
+                        log("CLICKED on Participant Context tab li");
+                    } catch (Exception tabErr) {
+                        str = tabErr.getMessage();
+                        log(str);
+                        setAttribute(a, "style", "background: 000");
+                        flag = true;
+                    }
+                }
+
             } else {
-                log("details is not clickable");
+                log("Details tab is not clickable");
             }
             log("context: " + context);
             waitForDetails(itemXpath, context);
@@ -156,7 +272,9 @@ public class Participants extends Framework {
             log("totaltime: " + totalTime);
 
         } catch (Exception ex) {
-            log("Did not find tab or anchor for details.");
+            log("**********************************************");
+            log("Did not find tab or li for " + context);
+            log("**********************************************");
             log(ex.getMessage());
             ex.printStackTrace();
             return 0;
@@ -167,8 +285,9 @@ public class Participants extends Framework {
 
     /**
      * Method waitForDetails method to wait for all detail context calls to finish
+     *
      * @param itemXpath is the xpath string for the web element to wait for.
-     * @param context is the context of the tests (details, notes, efolder, etc)
+     * @param context   is the context of the tests (details, notes, efolder, etc)
      */
     public void waitForDetails(String itemXpath, String context) {
         ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() {
@@ -176,9 +295,9 @@ public class Participants extends Framework {
                 String script = "" +
                         "var node = document.evaluate('" + itemXpath + "', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;" +
                         "if(node != null)  { " +
-                        "  return node.value;" +
+                        "  return node.textContent;" +
                         "} else { " +
-                        "  return 'false';" +
+                        "  return 'CONTENT DETAILS NOT FOUND';" +
                         "}";
                 String result = ((JavascriptExecutor) driver).executeScript(script).toString();
                 Boolean flag = (result.contains("false")) ? false : true;
@@ -205,6 +324,9 @@ public class Participants extends Framework {
         log("**********************************************");
 
         switch (context) {
+            case "history":
+                globals.historyDetails = result;
+                break;
             case "details":
                 globals.participantDetails = result;
                 break;
@@ -212,5 +334,11 @@ public class Participants extends Framework {
                 globals.notesDetails = result;
                 break;
         }
+    }
+
+    public void setAttribute(WebElement element, String attName, String attValue) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
+                element, attName, attValue);
     }
 }

@@ -20,8 +20,8 @@ public class LoadEmpwrAppPage extends Framework {
     private BrowserUtils browser;
     private static JavascriptExecutor js;
 
-    private By waffleLocator = By.className("slds-icon-waffle_container");
-    private By searchAppLocator = By.xpath("//input[@placeholder='Search apps and items...']");
+    private By waffleLocator =          By.className("slds-icon-waffle_container");
+    private By searchAppLocator =       By.xpath("//input[@placeholder='Search apps and items...']");
     private By menuButtonLocator =      By.xpath("/html/body/div[4]/div[1]/div[2]/header/div[3]/div/div[1]/div[3]/div/button");
     private By homeDropdownLocator =    By.xpath("/html/body/div[4]/div[1]/div[2]/header/div[3]/div/div[1]/div[3]/div/section/div/div/ul/li[1]");
     private By reportsDropDownLocator = By.xpath("/html/body/div[4]/div[1]/div[2]/header/div[3]/div/div[1]/div[3]/div/section/div/div/ul/li[2]");
@@ -48,6 +48,7 @@ public class LoadEmpwrAppPage extends Framework {
         List<WebElement> els;
         long appLoadTime = 0;
         long startTime;
+        String str;
 
         log(driver.getCurrentUrl());
         try {
@@ -59,9 +60,26 @@ public class LoadEmpwrAppPage extends Framework {
 
         ActiveTabsHelper activeTabs = new ActiveTabsHelper();
 
-        browser.waitForTitle("Home | Salesforce");
-        activeTabs.close();
-        log(driver.getCurrentUrl());
+        try {
+            browser.waitForTitle("Home | Salesforce");
+            activeTabs.close();
+            log(driver.getCurrentUrl());
+        } catch (Exception wex) {
+            log("Not at home page yet!");
+        }
+
+        str = driver.getCurrentUrl();
+        while(!str.contains("home")) {
+            log("one.app");
+            try {
+                Thread.sleep(500);
+            } catch (Exception ex) {
+                log(ex.getMessage());
+            }
+            activeTabs.close();
+            browser.waitForPageLoaded();
+            str = driver.getCurrentUrl();
+        }
 
         els = driver.findElements(waffleLocator);
         log("LoadEmpwrAppPage els: " + els.size());
@@ -133,6 +151,7 @@ public class LoadEmpwrAppPage extends Framework {
         str = driver.getCurrentUrl();
         startTime = System.currentTimeMillis();
         while(str.contains("one.app")) {
+            log("one.app");
             try {
                 Thread.sleep(500);
             } catch (Exception ex) {

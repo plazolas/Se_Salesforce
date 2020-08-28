@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,37 +13,39 @@ import org.openqa.selenium.WebDriver;
 
 /**
  * Class BrowserUtils contains reusable selenium widget manipulation methods
+ *
  * @author Oswaldo Plazola
  * @version 1.0
  */
 public class BrowserUtils extends Framework {
 
     private static WebDriverWait wait;
-    private static JavascriptExecutor js = (JavascriptExecutor)driver;
+    private static JavascriptExecutor js = (JavascriptExecutor) driver;
     private long timeout = 0;
     private long polling = 0;
-    
+
     public BrowserUtils(long timeoutSec, int pollingSec) {
-        timeout = (timeoutSec > 0) ? timeoutSec : 60;
+        timeout = (timeoutSec > 0) ? timeoutSec : 90;
         polling = (pollingSec > 0) ? pollingSec : 50;
         wait = new WebDriverWait(driver, timeout, polling);
     }
-    
+
     /**
      * waitFor method to poll page title
      *
      * @param title String page title
      */
     public static void waitForTitle(String title) {
-        wait.until( ExpectedConditions.refreshed(ExpectedConditions.titleContains(title)) );
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.titleContains(title)));
     }
 
     /**
      * waitForURL method to poll page URL
+     *
      * @param url relative url location of page
      */
     public static void waitForURL(String url) {
-        wait.until( ExpectedConditions.refreshed(ExpectedConditions.urlContains(url)) );
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.urlContains(url)));
     }
 
     /**
@@ -51,7 +54,7 @@ public class BrowserUtils extends Framework {
      * @param by Selenium WebElement locating mechanism
      */
     public static void waitForClickable(By by) {
-        wait.until( ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(by)) );
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(by)));
     }
 
     /**
@@ -61,7 +64,7 @@ public class BrowserUtils extends Framework {
      */
     public static void waitForClickableByText(String text) {
         String byXpath = "//a[text()='" + text + "']";
-        wait.until( ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(By.xpath(byXpath))) );
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(By.xpath(byXpath))));
     }
 
     /**
@@ -70,8 +73,7 @@ public class BrowserUtils extends Framework {
      * @param javascript is the script to be run.
      * @return str is the result output string.
      */
-    public String runJavascript(String javascript)
-    {
+    public String runJavascript(String javascript) {
         String str = ((JavascriptExecutor) driver).executeScript(javascript).toString();
         log(str);
         return str;
@@ -82,16 +84,17 @@ public class BrowserUtils extends Framework {
      *
      * @param by Selenium WebElement locating mechanism
      */
-    public static void click(By by)  {
+    public static void click(By by) {
         WebElement element = driver.findElement(by);
         js.executeScript("arguments[0].click();", element);
     }
 
     /**
      * clickByText method using JavaScript API click
+     *
      * @param text contains the text of the element to click
      */
-    public static void clickByText(String text)  {
+    public static void clickByText(String text) {
         String byXpath = "//a[text()='" + text + "']";
         try {
             WebElement element = driver.findElement(By.xpath(byXpath));
@@ -139,9 +142,9 @@ public class BrowserUtils extends Framework {
     /**
      * findByTagAttributeText method for locating WebElement by tag, attr and text
      *
-     * @param tag string for tag name
+     * @param tag       string for tag name
      * @param attribute string for name of html attribute
-     * @param text string to locate
+     * @param text      string to locate
      * @return WebElement if found, null otherwise
      */
     public WebElement findByTagAttributeText(String tag, String attribute, String text) {
@@ -151,15 +154,53 @@ public class BrowserUtils extends Framework {
 
         els = driver.findElements(By.tagName(tag));
         log("FindByTagAttributeText \r\n tag: " + tag +
-                            "\r\n attribute: " + attribute +
-                            "\r\n text: " + text +
-                            "\r\n found: " + els.size());
+                "\r\n attribute: " + attribute +
+                "\r\n text: " + text +
+                "\r\n found tags: " + els.size());
         for (int i = 0; i < els.size(); i++) {
             e = els.get(i);
             if (e.getAttribute(attribute).contains(text) || e.getText().contains(text)) {
-                if(e.isEnabled()) {
-                    log("found:\n " + e.getAttribute("outerHTML"));
+                if (e.isEnabled()) {
+                    log(e.getAttribute("outerHTML"));
                     break;
+                }
+            } else {
+                e = null;
+            }
+        }
+
+        return (e == null) ? null : e;
+    }
+
+    /**
+     * findByTagAttributeText method for locating WebElement by tag, attr and text
+     *
+     * @param tag       string for tag name
+     * @param attribute string for name of html attribute
+     * @param text      string to locate
+     * @return WebElement if found, null otherwise
+     */
+    public WebElement findByTagAttributeClassText(String tag, String attribute, String className, String text) {
+
+        WebElement e = null;
+        List<WebElement> els;
+        String str;
+
+        els = driver.findElements(By.tagName(tag));
+        log("FindByTagAttributeText \r\n tag: " + tag +
+                "\r\n attribute: " + attribute +
+                "\r\n class: " + className +
+                "\r\n text: " + text +
+                "\r\n found tags: " + els.size());
+        for (int i = 0; i < els.size(); i++) {
+            e = els.get(i);
+            if (e.getAttribute(attribute).contains(className)) {
+                str = e.getAttribute("outerHTML");
+                if (str.contains(text)) {
+                    log(str);
+                    break;
+                } else {
+                    e = null;
                 }
             } else {
                 e = null;
@@ -225,7 +266,7 @@ public class BrowserUtils extends Framework {
             e = driver.findElement(By.tagName("html"));
             str += e.getAttribute("outerHTML");
             str += "*******************^^^ DUMP ^^^*******************";
-            if(toScreen) log(str);
+            if (toScreen) log(str);
         } catch (Throwable error) {
             log(error.getMessage());
         }
@@ -234,6 +275,7 @@ public class BrowserUtils extends Framework {
 
     /**
      * Method checks if browser has crashed
+     *
      * @param fileStr is the path / filename of the log file
      */
     public static void check(String fileStr) {

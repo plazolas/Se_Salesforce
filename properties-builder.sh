@@ -58,10 +58,7 @@ test.env=$ENVIRONMENT
 test.appName=eMPWR-VA
 test.homepage=https://va--fasaoa2dev.lightning.force.com/
 test.homepageTitle1=Salesforce
-test.number_of_tests=1
-test.number_of_users=1
-test.implicitWait=90
-test.polling=50
+
 test.reportsPath=$SALESFORCE_REPORTS_DIR
 test.output_log=$OUTPUT_LOG
 test.WORK_DIR=$WORK_DIR
@@ -81,6 +78,10 @@ test.truststore=$TRUST_STORE
 ########### WebDriver Settings ###########
 webdriver.type=chrome
 webdriver.mode=headless
+test.number_of_tests=1
+test.number_of_users=1
+test.implicitWait=90
+test.polling=50
 ##########################################
 
 # Selenium WebDriver Location for local runs
