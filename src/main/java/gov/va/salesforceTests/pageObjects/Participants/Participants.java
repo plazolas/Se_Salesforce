@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
+import java.util.List;
+
 /**
  * @author Oswaldo Plazola
  * @version 1.0
@@ -27,7 +29,8 @@ public class Participants extends Framework {
     private String histXpath =        "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/lightning-tab-bar/ul/li[1]/a";
     private String detailsXpath =     "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/lightning-tab-bar/ul/li[2]/a";
     private String notesXpath =       "/html/body/div[4]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/lightning-tab-bar/ul/li[3]/a";
-    private String historyItemXpath = "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/slot/flexipage-tab2[1]/slot/flexipage-component2/slot/flexipage-aura-wrapper/div/div/div/div[1]/div/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div/table/tbody/tr[1]/th/span/div/a";
+    //private String historyItemXpath = "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/slot/flexipage-tab2[1]/slot/flexipage-component2/slot/flexipage-aura-wrapper/div/div/div/div[1]/div/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div/table/tbody/tr[1]/th/span/div/a";
+    private String historyItemXpath = "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/slot/flexipage-tab2[1]/slot/flexipage-component2/slot/c-empwr_-view-transaction-history/div/article/div[1]/header/div[2]/div/h1";
     private String detailsItemXpath = "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/slot/flexipage-tab2[2]/slot/flexipage-component2/slot/records-lwc-detail-panel/records-base-record-form/div/div/div/records-record-layout-event-broker/slot/records-lwc-record-layout/forcegenerated-detailpanel_contact___012t000000009jaaai___full___view___recordlayout2/force-record-layout-block/slot/force-record-layout-section/div/div/div";
     private String notesItemXpath =   "/html/body/div[4]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div/slot/slot/flexipage-component2/slot/flexipage-tabset2/div/lightning-tabset/div/slot/slot/slot/flexipage-tab2[3]/slot/flexipage-component2/slot/c-e-m-p-w-r_-notes/div/div/lightning-datatable/div[2]/div/div/div/table/tbody/tr[1]/td[1]/lightning-primitive-cell-factory/span/div/lightning-base-formatted-text";
     private String componentXpath =   "/html/body/div[5]/div[1]/div[2]/div[2]/div/div/div/section/div/div[2]/div[1]/div[1]/div/div/div/one-record-home-flexipage2/forcegenerated-adgrollup_component___forcegenerated__flexipage_recordpage___empwr_participant_recordpage___contact___view/forcegenerated-flexipage_empwr_participant_recordpage_contact__view_js/record_flexipage-record-page-decorator/div/slot/flexipage-record-home-single-col-template-desktop2/div/div[2]/div";
@@ -132,11 +135,17 @@ public class Participants extends Framework {
         By ByXpath = null;
         String itemXpath = "";
         WebElement a = null;
+        WebElement e = null;
         String script;
         String str;
         Boolean flag;
         long startTime = 0;
         long totalTime;
+
+        log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        log(driver.getCurrentUrl());
+        log(driver.getTitle());
+        log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
         switch (context) {
             case "history":
@@ -156,19 +165,81 @@ public class Participants extends Framework {
         if(context.contains("history")) {
             try {
                 Thread.sleep(5000);
-                WebElement e = browser.findByTagAttributeClassText("div", "class", "oneUtilityBar", "Participant Search");
+                e = browser.findByTagAttributeClassText("div", "class", "oneUtilityBar", "Participant Search");
                 while (e != null) {
                     JavascriptExecutor js = (JavascriptExecutor) driver;
                     js.executeScript("return arguments[0].setAttribute('style','z-index: -1');", e);
                     js.executeScript("return arguments[0].remove();", e);
+                    log("***************************");
                     log("*** REMOVED UTILITY BAR ***");
+                    log("***************************");
                     e = browser.findByTagAttributeClassText("div", "class", "oneUtilityBar", "Participant Search");
                 }
 
             } catch (Exception spinnerErr) {
-                System.out.println("**********  COULD NOT REMOVE Participant Search UTILITY BAR ***************");
+                System.out.println("**********  COULD NOT REMOVE UTILITY BAR ***************");
             }
             try {
+                e = browser.findByTagAttributeText("div", "class", "pmcontainer");
+                while (e != null) {
+                    JavascriptExecutor js = (JavascriptExecutor) driver;
+                    js.executeScript("return arguments[0].setAttribute('style','z-index: -1');", e);
+                    js.executeScript("return arguments[0].remove();", e);
+                    log("***************************");
+                    log("*** REMOVED pmcontainer ***");
+                    log("***************************");
+                    e = browser.findByTagAttributeText("div", "class", "pmcontainer");
+                }
+            } catch (Exception spinnerErr) {
+                log("**********  COULD NOT REMOVE pmcontainer ***************");
+            }
+            try {
+                flag = false;
+                startTime = System.currentTimeMillis();
+                totalTime = 0;
+                int counter;
+                int prev_counter = 0;
+                while(flag == false && totalTime < 100000) {
+                    List<WebElement> els = driver.findElements(By.tagName("div"));
+                    log("\r\n tag: " + "div" +
+                            "\r\n attribute: " + "flexipage-recordhomesinglecoltemplatedesktop2_recordhomesinglecoltemplatedesktop2" +
+                            "\r\n text: " + "flexipage_tabset" +
+                            "\r\n found flexipage-component2 tags: " + els.size());
+                    counter = els.size();
+                    if(prev_counter < counter) {
+                        prev_counter = counter;
+                        for (int i = 0; i < els.size(); i++) {
+                            e = els.get(i);
+                            if (e.getAttribute("flexipage-recordhomesinglecoltemplatedesktop2_recordhomesinglecoltemplatedesktop2") == "") {
+                            //if (e.getAttribute("outerHTML") != null && e.getAttribute("outerHTML").contains("flexipage-recordhomesinglecoltemplatedesktop2_recordhomesinglecoltemplatedesktop2")) {
+                                str = e.getAttribute("outerHTML");
+                                log(str);
+                                flag = true;
+                                break;
+                            } else {
+                                e = null;
+                            }
+                        }
+                    }
+                    Thread.sleep(10000);
+                    totalTime = System.currentTimeMillis() - startTime;
+                    System.out.println(totalTime);
+                }
+                totalTime = System.currentTimeMillis() - startTime;
+                return totalTime;
+                /*
+                if (e != null) {
+                    JavascriptExecutor js = (JavascriptExecutor) driver;
+                    js.executeScript("return arguments[0].setAttribute('style','z-index: 9999');", e);
+                    log("*** CHANGED Z-INDEX TO 9999 ***");
+                }
+                */
+            } catch (Exception spinnerErr) {
+                System.out.println("**********  COULD NOT CHANGE Z-INDEX TO 9999 ***************");
+            }
+
+            try {
+                /*
                 script = " " +
                         "var spinner = document.querySelectorAll('.slds-spinner_container');" +
                         "var content = '' ;" +
@@ -181,7 +252,7 @@ public class Participants extends Framework {
                         "str = 'spinners: ' + spinner.length + '--' + str;" +
                         "return str;";
                 browser.runJavascript(script);
-    
+
                 script = " " +
                         "var e = document.querySelector('.viewport');" +
                         "var hasVerticalScrollbar = e.scrollHeight > e.clientHeight;" +
@@ -196,27 +267,29 @@ public class Participants extends Framework {
                         "return str;";
                 browser.runJavascript(script);
 
+
                 script = " " +
                         "var nodes = document.evaluate('" + componentXpath + "', document, null, XPathResult.ANY_TYPE, null);" +
                         "if(nodes == null)  { " +
                         "  return 'nodes is null';" +
                         "}" +
                         "var component = null;" +
-                        "var str = '';" +
-                        "if(nodes.iterateNext == 'function') { " +
+                        "var str = typeof nodes.iterateNext;" +
+                        "if(str == 'function') { " +
                         "  component = nodes.iterateNext(); " +
+                        "  str += 'component.iterateNext() '; " +
                         "} else {" +
-                        "  str = nodes.iterateNext;" +
-                        "  str += nodes.resultType;" +
-                        "  return str;" +
+                        "  str += ' **************** ';" +
                         "}" +
                         "if(component != null)  { " +
                         "  component.setAttribute('style','z-index: 99999');" +
                         "  return component.innerHTML;" +
                         "} else { " +
-                        "  return 'component is null';" +
+                        "  str += ' | component is null!';" +
+                        "  return str;" +
                         "}";
                 browser.runJavascript(script);
+                */
 
                 log("context: " + context);
                 startTime = System.currentTimeMillis();
@@ -226,47 +299,55 @@ public class Participants extends Framework {
                 return totalTime;
 
             } catch (Exception scrollErr) {
-                System.out.println("** 0X *********** viewport - spinner count Exception!");
+                System.out.println("** 0X *********** Exception!");
                 log(scrollErr.getMessage());
             }
         }
 
-        // Notes has not been implemented yet3hour(s) |
+        // Notes has not been implemented yet
         if (context.contains("notes")) {
-            return 99999;
+            return 0;
         }
 
-        try {
-            a = driver.findElement(ByXpath);
-        } catch (Exception xpex) {
-            log("Did not find context tab");
-            log(xpex.getMessage());
+        if(!context.contains("history")) {
+            try {
+                a = driver.findElement(ByXpath);
+                log(a.getAttribute("outerHTML"));
+            } catch (Exception xpex) {
+                log("XXXXXXXXXXXXXXXXXXXXXXX");
+                log("Did not find context tab");
+                log("XXXXXXXXXXXXXXXXXXXXXXX");
+                log(xpex.getMessage());
+            }
+        } else {
+
         }
-        log(a.getAttribute("outerHTML"));
 
-        startTime = System.currentTimeMillis();
+
         try {
-            if (a.isEnabled() && a.isDisplayed()) {
-
-                flag = false;
-                while (flag == false) {
-                    try {
-                        Thread.sleep(2000);
-                        a.click();
-                        flag = true;
-                        log("CLICKED on Participant Context tab li");
-                    } catch (Exception tabErr) {
-                        str = tabErr.getMessage();
-                        log(str);
-                        setAttribute(a, "style", "background: 000");
-                        flag = true;
+            if(!context.contains("history")) {
+                if (a.isEnabled() && a.isDisplayed()) {
+                    flag = false;
+                    while (flag == false) {
+                        try {
+                            Thread.sleep(2000);
+                            a.click();
+                            flag = true;
+                            log("CLICKED on Participant Context tab li");
+                        } catch (Exception tabErr) {
+                            str = tabErr.getMessage();
+                            log(str);
+                            setAttribute(a, "style", "background: 000");
+                            flag = true;
+                        }
                     }
-                }
 
-            } else {
-                log("Details tab is not clickable");
+                } else {
+                    log("Details tab is not clickable");
+                }
             }
             log("context: " + context);
+            startTime = System.currentTimeMillis();
             waitForDetails(itemXpath, context);
             totalTime = System.currentTimeMillis() - startTime;
             log("totaltime: " + totalTime);
@@ -297,10 +378,10 @@ public class Participants extends Framework {
                         "if(node != null)  { " +
                         "  return node.textContent;" +
                         "} else { " +
-                        "  return 'CONTENT DETAILS NOT FOUND';" +
+                        "  return 'CONTENT DETAILS NOT FOUND: ' + node;" +
                         "}";
                 String result = ((JavascriptExecutor) driver).executeScript(script).toString();
-                Boolean flag = (result.contains("false")) ? false : true;
+                Boolean flag = (result.contains("DETAILS NOT FOUND")) ? false : true;
                 if (flag) System.out.println("Found context element!");
                 return flag;
             }

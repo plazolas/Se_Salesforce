@@ -40,7 +40,7 @@ public class GenTestId extends Framework {
         } catch (NoSuchAlgorithmException ex) {
             log(ex.getMessage());
         }
-        testid = uniqueTestId;
+        testid = uniqueTestId.replaceAll("-", "");
     }
 
     /**

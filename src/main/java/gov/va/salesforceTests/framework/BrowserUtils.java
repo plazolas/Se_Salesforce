@@ -197,7 +197,7 @@ public class BrowserUtils extends Framework {
             if (e.getAttribute(attribute).contains(className)) {
                 str = e.getAttribute("outerHTML");
                 if (str.contains(text)) {
-                    log(str);
+                    //og(str);
                     break;
                 } else {
                     e = null;

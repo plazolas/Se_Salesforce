@@ -2,7 +2,6 @@ package gov.va.salesforceTests.pageObjects;
 
 import gov.va.salesforceTests.framework.Framework;
 import gov.va.salesforceTests.framework.BrowserUtils;
-import gov.va.salesforceTests.helpers.ActiveTabsHelper;
 import org.openqa.selenium.*;
 
 import java.util.*;
@@ -58,11 +57,9 @@ public class LoadEmpwrAppPage extends Framework {
         }
         log(driver.getCurrentUrl());
 
-        ActiveTabsHelper activeTabs = new ActiveTabsHelper();
-
         try {
             browser.waitForTitle("Home | Salesforce");
-            activeTabs.close();
+            closeActiveTabs();
             log(driver.getCurrentUrl());
         } catch (Exception wex) {
             log("Not at home page yet!");
@@ -76,16 +73,17 @@ public class LoadEmpwrAppPage extends Framework {
             } catch (Exception ex) {
                 log(ex.getMessage());
             }
-            activeTabs.close();
+            closeActiveTabs();
             browser.waitForPageLoaded();
             str = driver.getCurrentUrl();
         }
 
         els = driver.findElements(waffleLocator);
-        log("LoadEmpwrAppPage els: " + els.size());
+        log("LoadEmpwrAppPage waffles: " + els.size());
         if (els.size() > 0) {
             waffle = els.get(0);
         } else {
+            log("No waffle found!");
             els = driver.findElements(By.tagName("button"));
             for (Integer i = 0; i < els.size(); i++) {
                 WebElement el = els.get(i);
@@ -144,6 +142,23 @@ public class LoadEmpwrAppPage extends Framework {
 
         if (!validComponents.contains(component)) {
             component = "Home";
+        }
+
+        try {
+            Thread.sleep(5000);
+            e = browser.findByTagAttributeClassText("div", "class", "oneUtilityBar", "Participant Search");
+            while (e != null) {
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("return arguments[0].setAttribute('style','z-index: -1');", e);
+                js.executeScript("return arguments[0].remove();", e);
+                log("***************************");
+                log("*** REMOVED UTILITY BAR ***");
+                log("***************************");
+                e = browser.findByTagAttributeClassText("div", "class", "oneUtilityBar", "Participant Search");
+            }
+
+        } catch (Exception spinnerErr) {
+            System.out.println("**********  COULD NOT REMOVE UTILITY BAR ***************");
         }
 
         log("component: " + component);

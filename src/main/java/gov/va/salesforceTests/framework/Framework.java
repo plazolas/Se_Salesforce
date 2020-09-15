@@ -313,7 +313,7 @@ public class Framework extends Logger {
                     e = els.get(i);
                     if (e.isDisplayed() && e.isEnabled()) {
                         str = e.getAttribute("innerHTML");
-                        if (str.contains("Close")) {
+                        if (str.contains("Close") && !str.contains("CloseAll")) {
                             j++;
                             log(i + ": Closing Tab" + str);
                             try {
